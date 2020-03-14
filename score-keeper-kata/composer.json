@@ -1,5 +1,5 @@
 {
-    "description": "Our first try in mobprogramming",
+    "description": "Our first try in mobprogramming (remotely)",
     "name": "messless/score-keeper-kata",
     "type": "project",
     "require": {
@@ -7,5 +7,23 @@
     },
     "autoload": {
         "psr-4": {"Kata\\": "."}
-    }
+    },
+    "authors": [
+        {
+            "name": "Daniel Kratohvil",
+            "email": "daniel@getintenso.com"
+        },
+        {
+            "name": "Rafa Esteller",
+            "email": "esteller.rafa@gmail.com"
+        },
+        {
+            "name": "Jesús Plou",
+            "email": "jesusplou@gmail.com"
+        },
+        {
+            "name": "Valentin Boyanov",
+            "email": "val.rusev@gmail.com"
+        }
+    ]
 }
