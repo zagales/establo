@@ -1,0 +1,11 @@
+{
+    "description": "Our first try in mobprogramming",
+    "name": "messless/score-keeper-kata",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {"Kata\\": "."}
+    }
+}
