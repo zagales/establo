@@ -20,7 +20,7 @@ Run tests:
 
 ## Open interesting discussions
 
-- Among the `str_pad` and `sprintf` php functions, which one is more appropriate in the context of ScoreKeeper?
+- Among the `str_pad` and `sprintf` php functions, which one is more appropriate in the context of `ScoreKeeper`?
 - Where should the `formatting part` live?
 - What should be the responsibilities of `Team`?
 
