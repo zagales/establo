@@ -38,7 +38,13 @@ class ScoreKeeperTest extends TestCase
 
     public function test_score_returns_a_seven_characters_score()
     {
+        $this->markTestIncomplete('Check score over 99 for both teams');
+
         //Arrange
+        $this->scoreKeeper->scoreTeamA3();
+        $this->scoreKeeper->scoreTeamA3();
+        $this->scoreKeeper->scoreTeamA3();
+        $this->scoreKeeper->scoreTeamA1();
         $score = $this->scoreKeeper->getScore();
         $expectedLength = 7;
 
@@ -100,6 +106,124 @@ class ScoreKeeperTest extends TestCase
 
         //Act
         $this->scoreKeeper->scoreTeamA1();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_score_team_a_increments_one_point_twice()
+    {
+        //Arrange
+        $expectedScore = '002:000';
+
+        //Act
+        $this->scoreKeeper->scoreTeamA1();
+        $this->scoreKeeper->scoreTeamA1();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_score_team_a_increments_two_points()
+    {
+        //Arrange
+        $expectedScore = '002:000';
+
+        //Act
+        $this->scoreKeeper->scoreTeamA2();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_score_team_a_increments_three_points()
+    {
+        //Arrange
+        $expectedScore = '003:000';
+
+        //Act
+        $this->scoreKeeper->scoreTeamA3();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_score_team_a_increments_ten_points()
+    {
+        //Arrange
+        $expectedScore = '010:000';
+
+        //Act
+        $this->scoreKeeper->scoreTeamA3();
+        $this->scoreKeeper->scoreTeamA3();
+        $this->scoreKeeper->scoreTeamA3();
+        $this->scoreKeeper->scoreTeamA1();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+
+    public function test_score_team_a_increments_hundred_points()
+    {
+        //Arrange
+        $expectedScore = '100:000';
+
+        //Act
+        for ($i = 0; $i<100; $i++) {
+            $this->scoreKeeper->scoreTeamA1();
+        }
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_score_team_b_increments_one_point()
+    {
+        //Arrange
+        $expectedScore = '000:001';
+
+        //Act
+        $this->scoreKeeper->scoreTeamB1();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_score_team_b_increments_one_point_twice()
+    {
+        //Arrange
+        $expectedScore = '000:002';
+
+        //Act
+        $this->scoreKeeper->scoreTeamB1();
+        $this->scoreKeeper->scoreTeamB1();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_both_teams_score_one_point()
+    {
+        //Arrange
+        $expectedScore = '001:001';
+
+        //Act
+        $this->scoreKeeper->scoreTeamB1();
+        $this->scoreKeeper->scoreTeamA1();
+
+        //Assert
+        $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
+    }
+
+    public function test_team_b_scores_five_point()
+    {
+        //Arrange
+        $expectedScore = '000:005';
+
+        //Act
+        $this->scoreKeeper->scoreTeamB2();
+        $this->scoreKeeper->scoreTeamB3();
 
         //Assert
         $this->assertEquals($expectedScore, $this->scoreKeeper->getScore());
