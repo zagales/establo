@@ -18,7 +18,11 @@ Run tests:
 ./vendor/bin/phpunit --colors ScoreKeeperTest.php
 ```
 
-## Open discussions
+## Open interesting discussions
 
 - Where should the `formatting part` live?
 - What should be the responsibilities of `Team`?
+
+## Readings
+
+- [Use An Ask, Don’t Tell Policy With Ruby](http://patshaughnessy.net/2014/2/10/use-an-ask-dont-tell-policy-with-ruby)
