@@ -17,3 +17,8 @@ Run tests:
 ```
 ./vendor/bin/phpunit --colors ScoreKeeperTest.php
 ```
+
+## Open discussions
+
+- Where should the `formatting part` live?
+- What should be the responsibilities of `Team`?
