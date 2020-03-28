@@ -1,8 +1,21 @@
 # Overview
 
-Our first try in mobprogramming (remotely) through [score-keeper-kata](https://kata-log.rocks/score-keeper-kata) and [Visual Code](https://code.visualstudio.com/)
+Our first try in mobprogramming (remotely) through [score-keeper-kata](https://kata-log.rocks/score-keeper-kata)
 
-## Usage
+* [Usage](#usage)
+* [Para la próxima sesión](#para-la-proxima-sesion)
+* [Learning](#learning)
+    * [Open interesting discussions](#open-interesting-discussions)
+    * [Learning opportunities](#learning-opportunities)
+    * [Readings](#readings)
+    * [Research on domain concepts](#research-on-domain-concepts)
+
+# Usage
+
+Collaboration tools:
+- [Visual Code](https://code.visualstudio.com/)
+- [Live Share Extension Pack](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack)
+- Google Hangouts
 
 Requirements:
 - php 7.3
@@ -15,8 +28,40 @@ composer install
 
 Run tests:
 ```
-./vendor/bin/phpunit --colors ScoreKeeperTest.php
+./vendor/bin/phpunit --colors --testsuite scorekeeper
 ```
+
+# Para la próxima sesión
+
+- Los nombres de los tests relacionados con `ScoreFormatter` nos indican que quizás es mejor representar parte de la información en el nombre de la propia clase. Darle una vuelta
+- Probar con los `DataProviders` resolver los tests: 
+    - `test_scores_under_ten_is_represented_by_seven_characters_string`
+    - `test_scores_under_one_hundred_is_represented_by_seven_characters_string`
+    - `test_scores_under_one_thousand_is_represented_by_seven_characters_string`
+- Ver cómo podemos testear parte de lo que ya estamos testeando en `ScoreKeeperTest` en `TeamTest`
+
+# Learning
+
+## Open interesting discussions
+
+- Among the `str_pad` and `sprintf` php functions, which one is more appropriate in the context of `ScoreKeeper`?
+- Where should the `formatting part` live?
+- What should be the responsibilities of `Team`?
+
+## Learning opportunities
+
+### Organizing Tests
+
+We wanted to keep the structure of the project simple by following the convention `the fewer directories and files the simpler`. 
+
+So we started in the simpler way, without the recomended structure of directories like `src` and `tests`. Instead we started with two `.php` files in the root directory, `./ScoreKeeper.php` for the SUT (System Under Test) and `./ScoreKeeperTest.php` for the tests. As long as we had only one file for the tests it was easy to run them executing `./vendor/bin/phpunit --colors ScoreKeeperTest.php`, but when we had to create more files this approach no longer worked. We solved the problem with [Test Suite feature](https://phpunit.readthedocs.io/en/9.0/organizing-tests.html#composing-a-test-suite-using-the-filesystem) of phpunit.
+
+Learning opportunity: Which are the features provided by phpunit to organize and run tests and how we can use them?
+
+## Readings
+
+- [Use An Ask, Don’t Tell Policy With Ruby](http://patshaughnessy.net/2014/2/10/use-an-ask-dont-tell-policy-with-ruby)
+- [Naming standards for unit tests](https://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html)
 
 ## Research on domain concepts
 
@@ -42,13 +87,3 @@ someone responsible for guarding or taking care of a person, animal, or thing:
 
 the way in which something is shown or arranged:
 - The two candidates could not agree on the format of the TV debate.
-
-## Open interesting discussions
-
-- Among the `str_pad` and `sprintf` php functions, which one is more appropriate in the context of `ScoreKeeper`?
-- Where should the `formatting part` live?
-- What should be the responsibilities of `Team`?
-
-## Readings
-
-- [Use An Ask, Don’t Tell Policy With Ruby](http://patshaughnessy.net/2014/2/10/use-an-ask-dont-tell-policy-with-ruby)
