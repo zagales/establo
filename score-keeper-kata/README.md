@@ -1,16 +1,13 @@
-# Overview
-
 Our first try in mobprogramming (remotely) through [score-keeper-kata](https://kata-log.rocks/score-keeper-kata)
 
 * [Usage](#usage)
 * [Para la próxima sesión](#para-la-proxima-sesion)
-* [Learning](#learning)
-    * [Open interesting discussions](#open-interesting-discussions)
-    * [Learning opportunities](#learning-opportunities)
-    * [Readings](#readings)
-    * [Research on domain concepts](#research-on-domain-concepts)
+* [Open interesting discussions](#open-interesting-discussions)
+* [Learning opportunities](#learning-opportunities)
+* [Readings](#readings)
+* [Research on domain concepts](#research-on-domain-concepts)
 
-# Usage
+## Usage
 
 Collaboration tools:
 - [Visual Code](https://code.visualstudio.com/)
@@ -31,7 +28,7 @@ Run tests:
 ./vendor/bin/phpunit --colors --testsuite scorekeeper
 ```
 
-# Para la próxima sesión
+## Para la próxima sesión
 
 - Los nombres de los tests relacionados con `ScoreFormatter` nos indican que quizás es mejor representar parte de la información en el nombre de la propia clase. Darle una vuelta
 - Probar con los `DataProviders` resolver los tests: 
@@ -40,7 +37,6 @@ Run tests:
     - `test_scores_under_one_thousand_is_represented_by_seven_characters_string`
 - Ver cómo podemos testear parte de lo que ya estamos testeando en `ScoreKeeperTest` en `TeamTest`
 
-# Learning
 
 ## Open interesting discussions
 
