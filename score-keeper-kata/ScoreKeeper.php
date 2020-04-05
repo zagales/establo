@@ -62,14 +62,12 @@ class ScoreKeeper
 
     public function getScore(): string
     {
-        $teamA = $this->formattedScore($this->teamA->score());
-        $teamB = $this->formattedScore($this->teamB->score());
+        $scoreFormatter = new ScoreFormatter();
 
-        return "{$teamA}:{$teamB}";
+        return $scoreFormatter->format(
+            $this->teamA->score(),
+            $this->teamB->score()
+        );
     }
-
-    private function formattedScore(int $score): string
-    {
-        return str_pad("{$score}", 3, '0', STR_PAD_LEFT);
-    }
+    
 }
