@@ -20,6 +20,7 @@
         <testsuite name="scorekeeper">
             <file>ScoreKeeperTest.php</file>
             <file>ScoreFormatterTest.php</file>
+            <file>TeamTest.php</file>
         </testsuite>
     </testsuites>
 
