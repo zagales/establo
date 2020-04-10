@@ -32,12 +32,12 @@ Run tests:
 
 ## Para la próxima sesión
 
-- Los nombres de los tests relacionados con `ScoreFormatter` nos indican que quizás es mejor representar parte de la información en el nombre de la propia clase. Darle una vuelta
-- Probar con los `DataProviders` resolver los tests: 
+- ~Los nombres de los tests relacionados con `ScoreFormatter` nos indican que quizás es mejor representar parte de la información en el nombre de la propia clase. Darle una vuelta~
+- ~Probar con los `DataProviders` resolver los tests~:
     - `test_scores_under_ten_is_represented_by_seven_characters_string`
     - `test_scores_under_one_hundred_is_represented_by_seven_characters_string`
     - `test_scores_under_one_thousand_is_represented_by_seven_characters_string`
-- Ver cómo podemos testear parte de lo que ya estamos testeando en `ScoreKeeperTest` en `TeamTest`
+- ~Ver cómo podemos testear parte de lo que ya estamos testeando en `ScoreKeeperTest` en `TeamTest`~
 
 
 ## Open interesting discussions

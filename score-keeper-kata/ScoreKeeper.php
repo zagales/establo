@@ -8,10 +8,10 @@ class ScoreKeeper
 
     private $teamB;
 
-    public function __construct()
+    public function __construct(Team $teamA, Team $teamB)
     {
-        $this->teamA = new Team();
-        $this->teamB = new Team();
+        $this->teamA = $teamA;
+        $this->teamB = $teamB;
     }
 
     public function scoreTeamA1(): void
