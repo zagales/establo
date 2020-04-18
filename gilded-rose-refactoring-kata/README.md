@@ -13,6 +13,12 @@ Collaboration tools:
 
 Environment eequirements:
 - ruby 2.5
+- bundler
+
+Install:
+```
+bundle install
+```
 
 Run tests:
 ```
