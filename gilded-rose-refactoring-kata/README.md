@@ -19,6 +19,13 @@ Run tests:
 ruby gilded_rose_tests.rb
 ```
 
+Run single test, eg `test_quality_is_never_negative`:
+```
+ruby gilded_rose_tests.rb -n test_quality_is_never_negative
+```
+
+After running tests o single test, coverege can be checked opening `coverage/index.html` in the browser. Thanks to [simplecov](https://github.com/colszowka/simplecov)
+
 Read the [requirements](./GildedRoseRequirements.txt)
 
 Run the program in order to understend better what is going on, eg: check invetory status for the next 2 days:
