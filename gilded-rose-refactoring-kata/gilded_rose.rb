@@ -18,7 +18,7 @@ class GildedRose
       increase_item_quality item
     else
       decrease_item_quality item
-    end
+    end  
     item.sell_in = item.sell_in - 1
     if item.sell_in < 0
       update_expired_item item
@@ -34,20 +34,21 @@ class GildedRose
   end
 
   def increase_item_quality item
-    if item.quality < 50
-      item.quality = item.quality + 1
-      if item.name == "Backstage passes to a TAFKAL80ETC concert"
-        if item.sell_in < 11
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
-        if item.sell_in < 6
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
+    if item.quality >= 50
+      return
+    end    
+    item.quality += 1
+    if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      if item.sell_in < 11
+        if item.quality < 50
+          item.quality += 1
         end
       end
+      if item.sell_in < 6
+        if item.quality < 50
+          item.quality += 1
+        end
+      end   
     end
   end
 
@@ -57,21 +58,22 @@ class GildedRose
     end 
   end
 
+  def remove_item_quality item
+    item.quality = 0
+  end
+
   def update_expired_item item
     if item.name != "Aged Brie"
       if item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          item.quality = item.quality - 1
-        end
+        decrease_item_quality item
       else
-        item.quality = item.quality - item.quality
+        remove_item_quality item
       end
     else
-      if item.quality < 50
-        item.quality = item.quality + 1
-      end
+      increase_item_quality item
     end
   end
+  
 end
 
 class Item
