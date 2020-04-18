@@ -13,5 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install Bundler (ruby dependencies manager)
+      run: sudo gem install bundler
+
     - name: Run tests
-      run: gem install bundler && make tests
+      run: make tests
