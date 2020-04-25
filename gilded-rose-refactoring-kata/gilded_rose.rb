@@ -7,8 +7,8 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       update_item(item)
-    end  
-  end  
+    end
+  end
 
   def update_item item
     if is_legendary_item item
@@ -18,7 +18,7 @@ class GildedRose
       increase_item_quality item
     else
       decrease_item_quality item
-    end  
+    end
     item.sell_in = item.sell_in - 1
     if item.sell_in < 0
       update_expired_item item
@@ -36,26 +36,24 @@ class GildedRose
   def increase_item_quality item
     if item.quality >= 50
       return
-    end    
+    end
+
     item.quality += 1
+
     if item.name == "Backstage passes to a TAFKAL80ETC concert"
       if item.sell_in < 11
-        if item.quality < 50
-          item.quality += 1
-        end
+        item.quality += 1
       end
       if item.sell_in < 6
-        if item.quality < 50
-          item.quality += 1
-        end
-      end   
+        item.quality += 1
+      end
     end
   end
 
   def decrease_item_quality item
     if item.quality > 0
       item.quality = item.quality - 1
-    end 
+    end
   end
 
   def remove_item_quality item
@@ -73,7 +71,7 @@ class GildedRose
       increase_item_quality item
     end
   end
-  
+
 end
 
 class Item

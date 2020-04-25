@@ -82,9 +82,7 @@ class TestUntitled < Test::Unit::TestCase
       Item.new(ITEM_SULFURAS, randomSellIn, initialQuality),
       Item.new(ITEM_BACKSTAGE_PASS, randomSellIn, initialQuality),
     ]
-
     GildedRose.new(items).update_quality()
-
     assert_true items[0].quality <= maximumQuality
     assert_true items[1].quality <= maximumQuality
     assert_true items[2].quality <= maximumQuality
@@ -96,9 +94,7 @@ class TestUntitled < Test::Unit::TestCase
     initialSellIn = 10
     initialQuality = 50
     items = [Item.new(ITEM_SULFURAS, initialSellIn, initialQuality)]
-
     GildedRose.new(items).update_quality()
-
     assert_equal items[0].sell_in, initialSellIn
     assert_equal items[0].quality, initialQuality
   end
