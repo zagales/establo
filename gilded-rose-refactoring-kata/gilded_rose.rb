@@ -38,16 +38,18 @@ class GildedRose
       return
     end
 
-    item.quality += 1
-
     if item.name == "Backstage passes to a TAFKAL80ETC concert"
-      if item.sell_in < 11
-        item.quality += 1
+      if item.sell_in > 5 and item.sell_in < 11
+        item.quality += 2
+        return
       end
       if item.sell_in < 6
-        item.quality += 1
+        item.quality += 3
+        return
       end
     end
+
+    item.quality += 1
   end
 
   def decrease_item_quality item
