@@ -7,8 +7,8 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       update_item(item)
-    end  
-  end  
+    end
+  end
 
   def update_item item
     if is_legendary_item item
@@ -18,7 +18,7 @@ class GildedRose
       increase_item_quality item
     else
       decrease_item_quality item
-    end  
+    end
     item.sell_in = item.sell_in - 1
     if item.sell_in < 0
       update_expired_item item
@@ -36,26 +36,39 @@ class GildedRose
   def increase_item_quality item
     if item.quality >= 50
       return
-    end    
-    item.quality += 1
+    end
+
     if item.name == "Backstage passes to a TAFKAL80ETC concert"
-      if item.sell_in < 11
-        if item.quality < 50
-          item.quality += 1
-        end
-      end
-      if item.sell_in < 6
-        if item.quality < 50
-          item.quality += 1
-        end
-      end   
+      increase_backstage_pass_quality item
+      return
+    end
+
+    if item.name == "Aged Brie"
+      item.quality += 1
+      return
     end
   end
 
+  def increase_backstage_pass_quality item
+    if item.sell_in > 5 and item.sell_in < 11
+      item.quality += 2
+      return
+    end
+
+    if item.sell_in < 6
+      item.quality += 3
+      return
+    end
+
+    item.quality += 1
+  end
+
   def decrease_item_quality item
-    if item.quality > 0
-      item.quality = item.quality - 1
-    end 
+    if item.quality <= 0 
+      return
+    end
+
+    item.quality = item.quality - 1    
   end
 
   def remove_item_quality item
@@ -63,17 +76,19 @@ class GildedRose
   end
 
   def update_expired_item item
-    if item.name != "Aged Brie"
-      if item.name != "Backstage passes to a TAFKAL80ETC concert"
-        decrease_item_quality item
-      else
-        remove_item_quality item
-      end
-    else
+    if item.name == "Aged Brie"
       increase_item_quality item
+      return
     end
+
+    if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      remove_item_quality item
+      return
+    end
+
+    decrease_item_quality item
   end
-  
+
 end
 
 class Item
