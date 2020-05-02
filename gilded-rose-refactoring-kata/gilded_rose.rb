@@ -68,6 +68,11 @@ class GildedRose
       return
     end
 
+    if item.name == "Conjured"
+      item.quality = item.quality - 2
+      return
+    end
+
     item.quality = item.quality - 1    
   end
 
