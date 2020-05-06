@@ -10,8 +10,9 @@ class GildedRose
     end
   end
 
-  def update_item item
+  def update_item item    
     if is_legendary_item item
+      LegendaryUpdater.new(item).update
       return
     end
     if is_item_that_increase_quality_with_time item
@@ -69,7 +70,12 @@ class GildedRose
     end
 
     if item.name == "Conjured"
-      item.quality = item.quality - 2
+      if item.quality <= 1
+        item.quality = 0
+      else
+        item.quality = item.quality - 2
+      end
+
       return
     end
 
@@ -107,5 +113,16 @@ class Item
 
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
+  end
+end
+
+class LegendaryUpdater
+  attr_accessor :item
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update()
   end
 end
