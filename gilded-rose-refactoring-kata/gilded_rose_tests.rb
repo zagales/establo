@@ -149,4 +149,28 @@ class TestUntitled < Test::Unit::TestCase
     assert_equal expectedQuality, items[0].quality
   end
 
+  def test_conjured_items_decrease_quality_twice
+    initialQuality = 10
+    daysLeft = 5
+    expectedQuality = 8
+
+    items = [Item.new("Conjured", daysLeft, initialQuality)]
+
+    GildedRose.new(items).update_quality()
+
+    assert_equal expectedQuality, items[0].quality
+  end
+
+  def test_conjured_items_quality_is_never_negative
+    initialQuality = 1
+    daysLeft = 5
+    expectedQuality = 0
+
+    items = [Item.new("Conjured", daysLeft, initialQuality)]
+
+    GildedRose.new(items).update_quality()
+
+    assert_equal expectedQuality, items[0].quality
+  end
+
 end
