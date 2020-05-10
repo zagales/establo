@@ -59,23 +59,25 @@ class DefaultUpdater
   end
 
   def update()
-    if @item.quality > 0 
-      @item.quality = @item.quality - 1  
-    end
+    decrease_quality
 
     decrease_sell_in
 
     if @item.sell_in < 0
-      @item.quality = @item.quality - 1
-    end
-
-    if @item.quality < 0
-      @item.quality = 0
+      decrease_quality
     end
   end
 
   def decrease_sell_in
     @item.sell_in = @item.sell_in - 1
+  end
+
+  def decrease_quality
+    if @item.quality > 0
+      @item.quality = @item.quality - 1
+    else
+      @item.quality = 0
+    end
   end
 end
 
@@ -91,7 +93,6 @@ class AgedBrieUpdater < DefaultUpdater
     end
 
     decrease_sell_in
-
   end
 end
 
@@ -125,11 +126,8 @@ end
 
 class ConjuredUpdater < DefaultUpdater
    def update()
-    if @item.quality <= 1
-      @item.quality = 0
-    else
-      @item.quality = @item.quality - 2
-    end
+    decrease_quality
+    decrease_quality
 
     decrease_sell_in
   end  
