@@ -63,7 +63,7 @@ class DefaultUpdater
       @item.quality = @item.quality - 1  
     end
 
-    @item.sell_in = @item.sell_in - 1
+    decrease_sell_in
 
     if @item.sell_in < 0
       @item.quality = @item.quality - 1
@@ -72,6 +72,10 @@ class DefaultUpdater
     if @item.quality < 0
       @item.quality = 0
     end
+  end
+
+  def decrease_sell_in
+    @item.sell_in = @item.sell_in - 1
   end
 end
 
@@ -86,7 +90,8 @@ class AgedBrieUpdater < DefaultUpdater
       @item.quality = @item.quality + 1
     end
 
-    @item.sell_in = @item.sell_in - 1
+    decrease_sell_in
+
   end
 end
 
@@ -110,7 +115,7 @@ class BackstagePassUpdater < DefaultUpdater
       increase_quality @item
     end
 
-    @item.sell_in = @item.sell_in - 1
+    decrease_sell_in
 
     if @item.sell_in < 0
       @item.quality = 0
@@ -126,7 +131,7 @@ class ConjuredUpdater < DefaultUpdater
       @item.quality = @item.quality - 2
     end
 
-    @item.sell_in = @item.sell_in - 1
+    decrease_sell_in
   end  
 end
 
