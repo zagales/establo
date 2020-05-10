@@ -15,6 +15,12 @@ class GildedRose
       LegendaryUpdater.new(item).update
       return
     end
+
+    if item.name == "Aged Brie"
+      AgedBrieUpdater.new(item).update
+      return
+    end
+
     if is_item_that_increase_quality_with_time item
       increase_item_quality item
     else
@@ -124,5 +130,21 @@ class LegendaryUpdater
   end
 
   def update()
+  end
+end
+
+class AgedBrieUpdater
+  attr_accessor :item
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update()
+    if @item.quality < 50
+      @item.quality = @item.quality + 1
+    end
+
+    @item.sell_in = @item.sell_in - 1
   end
 end
