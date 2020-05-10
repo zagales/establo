@@ -50,7 +50,8 @@ class Item
   end
 end
 
-class SulfurasUpdater
+
+class DefaultUpdater
   attr_accessor :item
 
   def initialize(item)
@@ -58,16 +59,28 @@ class SulfurasUpdater
   end
 
   def update()
+    if @item.quality > 0 
+      @item.quality = @item.quality - 1  
+    end
+
+    @item.sell_in = @item.sell_in - 1
+
+    if @item.sell_in < 0
+      @item.quality = @item.quality - 1
+    end
+
+    if @item.quality < 0
+      @item.quality = 0
+    end
   end
 end
 
-class AgedBrieUpdater
-  attr_accessor :item
-
-  def initialize(item)
-    @item = item
+class SulfurasUpdater < DefaultUpdater
+  def update()
   end
+end
 
+class AgedBrieUpdater < DefaultUpdater
   def update()
     if @item.quality < 50
       @item.quality = @item.quality + 1
@@ -77,13 +90,7 @@ class AgedBrieUpdater
   end
 end
 
-class BackstagePassUpdater
-  attr_accessor :item
-
-  def initialize(item)
-    @item = item
-  end
-  
+class BackstagePassUpdater < DefaultUpdater
   def increase_quality item
     if item.sell_in > 5 and item.sell_in < 11
       item.quality += 2
@@ -111,14 +118,8 @@ class BackstagePassUpdater
   end
 end
 
-class ConjuredUpdater
-  attr_accessor :item
-
-  def initialize(item)
-    @item = item
-  end
-
-  def update()
+class ConjuredUpdater < DefaultUpdater
+   def update()
     if @item.quality <= 1
       @item.quality = 0
     else
@@ -129,26 +130,3 @@ class ConjuredUpdater
   end  
 end
 
-class DefaultUpdater
-  attr_accessor :item
-
-  def initialize(item)
-    @item = item
-  end
-
-  def update()
-    if @item.quality > 0 
-      @item.quality = @item.quality - 1  
-    end
-
-    @item.sell_in = @item.sell_in - 1
-
-    if @item.sell_in < 0
-      @item.quality = @item.quality - 1
-    end
-
-    if @item.quality < 0
-      @item.quality = 0
-    end
-  end
-end
