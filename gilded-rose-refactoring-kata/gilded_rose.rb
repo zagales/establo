@@ -21,6 +21,11 @@ class GildedRose
       return
     end
 
+    if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      BackstagePassUpdater.new(item).update
+      return
+    end
+
     if is_item_that_increase_quality_with_time item
       increase_item_quality item
     else
@@ -147,4 +152,39 @@ class AgedBrieUpdater
 
     @item.sell_in = @item.sell_in - 1
   end
+end
+
+class BackstagePassUpdater
+  attr_accessor :item
+
+  def initialize(item)
+    @item = item
+  end
+  
+  def increase_quality item
+    if item.sell_in > 5 and item.sell_in < 11
+      item.quality += 2
+      return
+    end
+
+    if item.sell_in < 6
+      item.quality += 3
+      return
+    end
+
+    item.quality += 1
+  end
+
+  def update()
+    if @item.quality < 50
+      increase_quality @item
+    end
+
+    @item.sell_in = @item.sell_in - 1
+
+    if @item.sell_in < 0
+      @item.quality = 0
+    end
+  end
+
 end
