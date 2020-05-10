@@ -31,6 +31,9 @@ class GildedRose
       return
     end
 
+    DefaultUpdater.new(item).update
+    return
+
     if is_item_that_increase_quality_with_time item
       increase_item_quality item
     else
@@ -208,5 +211,29 @@ class ConjuredUpdater
     end
 
     @item.sell_in = @item.sell_in - 1
-  end 
+  end  
+end
+
+class DefaultUpdater
+  attr_accessor :item
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update()
+    if @item.quality > 0 
+      @item.quality = @item.quality - 1  
+    end
+
+    @item.sell_in = @item.sell_in - 1
+
+    if @item.sell_in < 0
+      @item.quality = @item.quality - 1
+    end
+
+    if @item.quality < 0
+      @item.quality = 0
+    end
+  end
 end
