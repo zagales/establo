@@ -11,8 +11,8 @@ class GildedRose
   end
 
   def update_item item    
-    if is_legendary_item item
-      LegendaryUpdater.new(item).update
+    if item.name == "Sulfuras, Hand of Ragnaros"
+      SulfurasUpdater.new(item).update
       return
     end
 
@@ -23,6 +23,11 @@ class GildedRose
 
     if item.name == "Backstage passes to a TAFKAL80ETC concert"
       BackstagePassUpdater.new(item).update
+      return
+    end
+
+    if item.name == "Conjured"
+      ConjuredUpdater.new(item).update
       return
     end
 
@@ -127,7 +132,7 @@ class Item
   end
 end
 
-class LegendaryUpdater
+class SulfurasUpdater
   attr_accessor :item
 
   def initialize(item)
@@ -186,5 +191,22 @@ class BackstagePassUpdater
       @item.quality = 0
     end
   end
+end
 
+class ConjuredUpdater
+  attr_accessor :item
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update()
+    if @item.quality <= 1
+      @item.quality = 0
+    else
+      @item.quality = @item.quality - 2
+    end
+
+    @item.sell_in = @item.sell_in - 1
+  end 
 end
