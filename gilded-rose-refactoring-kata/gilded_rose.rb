@@ -50,24 +50,19 @@ class Item
   end
 end
 
-
-class DefaultUpdater
+class ItemUpdater
   attr_accessor :item
 
   def initialize(item)
     @item = item
   end
-
+  
   def update()
-    decrease_quality
-
+    update_quality
     decrease_sell_in
-
-    if @item.sell_in < 0
-      decrease_quality
-    end
+    decrease_quality_if_expired
   end
-
+   
   def decrease_sell_in
     @item.sell_in = @item.sell_in - 1
   end
@@ -79,24 +74,52 @@ class DefaultUpdater
       @item.quality = 0
     end
   end
+
+  def decrease_quality_if_expired
+    if @item.sell_in < 0
+      decrease_quality
+    end
+  end  
 end
 
-class SulfurasUpdater < DefaultUpdater
-  def update()
+class DefaultUpdater < ItemUpdater
+  def update_quality
+    decrease_quality
   end
 end
 
-class AgedBrieUpdater < DefaultUpdater
-  def update()
+class SulfurasUpdater < ItemUpdater
+  def update_quality
+  end
+
+  def decrease_sell_in
+  end
+
+  def decrease_quality_if_expired
+  end 
+end
+
+class AgedBrieUpdater < ItemUpdater
+  def update_quality
     if @item.quality < 50
       @item.quality = @item.quality + 1
     end
-
-    decrease_sell_in
   end
 end
 
-class BackstagePassUpdater < DefaultUpdater
+class BackstagePassUpdater < ItemUpdater
+  def update_quality
+    if @item.quality < 50
+      increase_quality @item
+    end
+  end
+
+  def decrease_quality_if_expired
+    if @item.sell_in < 0
+      @item.quality = 0
+    end
+  end 
+
   def increase_quality item
     if item.sell_in > 5 and item.sell_in < 11
       item.quality += 2
@@ -109,27 +132,12 @@ class BackstagePassUpdater < DefaultUpdater
     end
 
     item.quality += 1
-  end
-
-  def update()
-    if @item.quality < 50
-      increase_quality @item
-    end
-
-    decrease_sell_in
-
-    if @item.sell_in < 0
-      @item.quality = 0
-    end
-  end
-end
-
-class ConjuredUpdater < DefaultUpdater
-   def update()
-    decrease_quality
-    decrease_quality
-
-    decrease_sell_in
   end  
 end
 
+class ConjuredUpdater < ItemUpdater
+   def update_quality()
+    decrease_quality
+    decrease_quality
+  end
+end
