@@ -31,8 +31,7 @@ class GildedRose
       return
     end
 
-    DefaultUpdater.new(item).update
-    
+    DefaultUpdater.new(item).update    
   end
 end
 
@@ -62,11 +61,20 @@ class ItemUpdater
       return
     end
 
-    update_quality
+    if gains_quality_over_time
+      increase_quality
+    else 
+      decrease_quality
+    end
+
     decrease_sell_in
     decrease_quality_if_expired
   end
-  
+
+  def gains_quality_over_time
+    return false
+  end
+
   def can_update
     return true
   end
@@ -103,44 +111,50 @@ class SulfurasUpdater < ItemUpdater
 end
 
 class AgedBrieUpdater < ItemUpdater
-  def update_quality
+  def increase_quality
     if @item.quality < 50
       @item.quality = @item.quality + 1
     end
   end
+  
+  def gains_quality_over_time
+    return true
+  end
 end
 
-class BackstagePassUpdater < ItemUpdater
-  def update_quality
-    if @item.quality < 50
-      increase_quality @item
-    end
-  end
-
+class BackstagePassUpdater < ItemUpdater 
   def decrease_quality_if_expired
     if @item.sell_in < 0
       @item.quality = 0
     end
   end 
 
-  def increase_quality item
-    if item.sell_in > 5 and item.sell_in < 11
-      item.quality += 2
+  def increase_quality
+    if @item.quality >= 50
+      return 
+    end
+
+    if @item.sell_in > 5 and @item.sell_in < 11
+      @item.quality += 2
       return
     end
 
-    if item.sell_in < 6
-      item.quality += 3
+    if @item.sell_in < 6
+      @item.quality += 3
       return
     end
 
-    item.quality += 1
-  end  
+    @item.quality += 1
+  end 
+  
+  def gains_quality_over_time
+    return true
+  end
 end
 
 class ConjuredUpdater < ItemUpdater
-   def update_quality()
-    decrease_quality
-    decrease_quality
+  def decrease_quality
+    super
+    super        
   end
 end
