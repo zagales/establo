@@ -31,7 +31,7 @@ class GildedRose
       return
     end
 
-    DefaultUpdater.new(item).update    
+    DefaultUpdater.new(item).update
   end
 end
 
@@ -57,7 +57,7 @@ class ItemUpdater
   end
   
   def update()
-    unless can_update
+    unless changes_over_time
       return
     end
 
@@ -75,7 +75,7 @@ class ItemUpdater
     return false
   end
 
-  def can_update
+  def changes_over_time
     return true
   end
 
@@ -105,7 +105,7 @@ class DefaultUpdater < ItemUpdater
 end
 
 class SulfurasUpdater < ItemUpdater
-  def can_update
+  def changes_over_time
     return false
   end 
 end
