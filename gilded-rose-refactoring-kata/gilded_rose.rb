@@ -58,13 +58,17 @@ class ItemUpdater
   end
   
   def update()
+    unless can_update
+      return
+    end
+
     update_quality
     decrease_sell_in
     decrease_quality_if_expired
   end
-   
-  def decrease_sell_in
-    @item.sell_in = @item.sell_in - 1
+  
+  def can_update
+    return true
   end
 
   def decrease_quality
@@ -73,6 +77,10 @@ class ItemUpdater
     else
       @item.quality = 0
     end
+  end
+
+  def decrease_sell_in
+    @item.sell_in = @item.sell_in - 1
   end
 
   def decrease_quality_if_expired
@@ -89,13 +97,8 @@ class DefaultUpdater < ItemUpdater
 end
 
 class SulfurasUpdater < ItemUpdater
-  def update_quality
-  end
-
-  def decrease_sell_in
-  end
-
-  def decrease_quality_if_expired
+  def can_update
+    return false
   end 
 end
 
