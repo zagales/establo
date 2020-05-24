@@ -10,9 +10,15 @@ class Alarm
     private $isAlarmOn = false;
     private $sensor;
 
-    public function __construct()
+    public function __construct($sensor = null)
     {
-        $this->sensor = new Sensor();
+        if ($sensor == null)
+        {
+            $this->sensor = new Sensor();
+        } else 
+        {
+            $this->sensor = $sensor;
+        }
     }
 
     public function check()
@@ -28,4 +34,5 @@ class Alarm
     {
         return $this->isAlarmOn;
     }
+
 }

@@ -9,9 +9,24 @@ use RacingCar\TirePressureMonitoring\Alarm;
 
 class TirePressureMonitoringTest extends TestCase
 {
-    public function testAlaramIsOffByDefault()
+    public function testAlarmIsOffByDefault()
     {
         $alarm = new Alarm();
         $this->assertFalse($alarm->isAlarmOn());
     }
+
+    public function testAlarmIsOnWhenOutOfThreshold()
+    {
+        $sensor = new class(){
+            public function popNextPressurePsiValue()
+            { 
+                return 15;
+            }
+        };
+
+        $alarm = new Alarm($sensor);
+        $alarm->check();
+        $this->assertTrue($alarm->isAlarmOn());
+    }
 }
+
