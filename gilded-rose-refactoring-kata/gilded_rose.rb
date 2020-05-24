@@ -11,10 +11,12 @@ class GildedRose
   end
 
   def update_item item
-    get_item_updater(item).update
+    ItemUpdaterFactory.get_item_updater(item).update
   end
+end
 
-  def get_item_updater item
+class ItemUpdaterFactory
+  def self.get_item_updater item
     if item.name == "Sulfuras, Hand of Ragnaros"
       return SulfurasUpdater.new(item)
     end
