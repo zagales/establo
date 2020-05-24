@@ -5,7 +5,7 @@ parameters:
         - 'php71'
         - 'symplify'
         - 'common'
-        - 'clean-code'
+#        - 'clean-code'
 
     line_ending: "\n"
 
