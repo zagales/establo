@@ -9,12 +9,13 @@ use InvalidArgumentException;
 
 class TelemetryClient
 {
-    public const DIAGNOSTIC_MESSAGE = "AT#UD";
+    public const DIAGNOSTIC_MESSAGE = 'AT#UD';
+
     private $onlineStatus = false;
+
     private $diagnosticMessageJustSent = false;
 
     /**
-     * @param string $telemetryServerConnectionString
      * @throws Exception
      */
     public function connect(string $telemetryServerConnectionString): void
@@ -35,7 +36,6 @@ class TelemetryClient
     }
 
     /**
-     * @param string $message
      * @throws Exception
      */
     public function send(string $message): void
@@ -58,7 +58,6 @@ class TelemetryClient
     }
 
     /**
-     * @return string
      * @throws Exception
      */
     public function receive(): string
@@ -83,7 +82,7 @@ Remote Rtrn Count........... 00";
             $this->diagnosticMessageJustSent = false;
         } else {
             #  Simulate the reception of a response message returning a random message.
-            $message = "";
+            $message = '';
             $messageLength = random_int(0, 50) + 60;
             $i = $messageLength;
             for ($i = $messageLength; $i >= 0; $i--) {

@@ -6,7 +6,9 @@ namespace RacingCar\Leaderboard;
 
 class Leaderboard
 {
-    /** @var Race[] */
+    /**
+     * @var Race[]
+     */
     private $races;
 
     /**
@@ -25,7 +27,7 @@ class Leaderboard
         foreach ($this->races as $race) {
             foreach ($race->getResults() as $driver) {
                 $name = $race->getDriverName($driver);
-                if (!isset($driverPoints[$name])) {
+                if (! isset($driverPoints[$name])) {
                     $driverPoints[$name] = 0;
                 }
                 $driverPoints[$name] += $race->getPoints($driver);

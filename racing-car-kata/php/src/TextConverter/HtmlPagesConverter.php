@@ -13,12 +13,12 @@ namespace RacingCar\TextConverter;
 class HtmlPagesConverter
 {
     private $filename;
+
     private $breaks;
 
     /**
      * HtmlPages constructor.
      * Reads the file and note the positions of the page breaks so we can access them quickly
-     * @param string $filename
      */
     public function __construct(string $filename)
     {
@@ -44,16 +44,16 @@ class HtmlPagesConverter
     {
         $pageStart = $this->breaks[$page];
         $pageEnd = $this->breaks[$page + 1];
-        $html = "";
+        $html = '';
         $f = fopen($this->filename, 'r');
         fseek($f, $pageStart);
-        while (ftell($f) != $pageEnd) {
+        while (ftell($f) !== $pageEnd) {
             $line = rtrim(fgets($f));
             if (strpos($line, 'PAGE_BREAK') !== false) {
                 continue;
             }
             $html .= htmlspecialchars($line, ENT_QUOTES | ENT_HTML5);
-            $html .= "<br />";
+            $html .= '<br />';
         }
         fclose($f);
         return $html;

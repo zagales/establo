@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class TelemetrySystemTest extends TestCase
 {
-    public function testCheckTransmissionShouldSendAndReceiveDiagnosticMessage()
+    public function testCheckTransmissionShouldSendAndReceiveDiagnosticMessage(): void
     {
         $this->markTestIncomplete();
     }

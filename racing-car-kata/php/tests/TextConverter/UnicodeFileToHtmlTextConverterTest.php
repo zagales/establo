@@ -9,9 +9,9 @@ use RacingCar\TextConverter\UnicodeFileToHtmlTextConverter;
 
 class UnicodeFileToHtmlTextConverterTest extends TestCase
 {
-    public function testFoo()
+    public function testFoo(): void
     {
-        $converter = new UnicodeFileToHtmlTextConverter("foo");
-        $this->assertEquals("fixme", $converter->getFileName());
+        $converter = new UnicodeFileToHtmlTextConverter('foo');
+        $this->assertSame('fixme', $converter->getFileName());
     }
 }

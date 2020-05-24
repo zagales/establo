@@ -9,7 +9,7 @@ use RacingCar\TurnTicketDispenser\TicketDispenser;
 
 class TurnTicketTest extends TestCase
 {
-    public function testDoSomething()
+    public function testDoSomething(): void
     {
         $dispenser = new TicketDispenser();
         $ticket = $dispenser->getTurnTicket();

@@ -7,13 +7,13 @@ namespace RacingCar\Leaderboard;
 class Driver
 {
     public $name;
+
     public $country;
 
     /**
      * Driver constructor.
      *
      * @param string $name
-     * @param string $country
      */
     public function __construct(?string $name, string $country)
     {
