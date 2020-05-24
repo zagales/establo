@@ -72,31 +72,38 @@ class TestUntitled < Test::Unit::TestCase
   end
 
   #The Quality of an item is never more than 50
-  def test_quality_of_item_cannot_be_over_50
+  def test_aged_brie_quality_cannot_be_over_50
     initialQuality = 50
     maximumQuality = 50
     randomSellIn = 10
-    items = [
-      Item.new(NO_SPECIAL_ITEM, randomSellIn, initialQuality),
-      Item.new(ITEM_AGED_BRIE, randomSellIn, initialQuality),
-      Item.new(ITEM_SULFURAS, randomSellIn, initialQuality),
-      Item.new(ITEM_BACKSTAGE_PASS, randomSellIn, initialQuality),
-    ]
-    GildedRose.new(items).update_quality()
-    assert_true items[0].quality <= maximumQuality
-    assert_true items[1].quality <= maximumQuality
-    assert_true items[2].quality <= maximumQuality
-    assert_true items[3].quality <= maximumQuality
+
+    item = Item.new(ITEM_AGED_BRIE, randomSellIn, initialQuality)
+    ItemUpdater.create(item).update
+
+    assert_true item.quality <= maximumQuality
+  end
+
+  def test_backstage_pass_quality_cannot_be_over_50
+    initialQuality = 50
+    maximumQuality = 50
+    randomSellIn = 10
+
+    item = Item.new(ITEM_BACKSTAGE_PASS, randomSellIn, initialQuality)
+    ItemUpdater.create(item).update
+    
+    assert_true item.quality <= maximumQuality
   end
 
   #“Sulfuras”, being a legendary item, never has to be sold or decreases in Quality
   def test_sulfuras_never_to_be_sold_or_decreases
     initialSellIn = 10
     initialQuality = 50
-    items = [Item.new(ITEM_SULFURAS, initialSellIn, initialQuality)]
-    GildedRose.new(items).update_quality()
-    assert_equal items[0].sell_in, initialSellIn
-    assert_equal items[0].quality, initialQuality
+
+    item = Item.new(ITEM_SULFURAS, initialSellIn, initialQuality)
+    ItemUpdater.create(item).update
+    
+    assert_equal item.sell_in, initialSellIn
+    assert_equal item.quality, initialQuality
   end
 
   #“Backstage passes”, like aged brie, increases in Quality as it’s SellIn value approaches;
@@ -172,5 +179,4 @@ class TestUntitled < Test::Unit::TestCase
 
     assert_equal expectedQuality, items[0].quality
   end
-
 end
