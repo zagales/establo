@@ -11,32 +11,27 @@ class GildedRose
   end
 
   def update_item item
-    if item.name == "Sulfuras, Hand of Ragnaros"
-      SulfurasUpdater.new(item).update
-      return
-    end
-
-    if item.name == "Aged Brie"
-      AgedBrieUpdater.new(item).update
-      return
-    end
-
-    if item.name == "Backstage passes to a TAFKAL80ETC concert"
-      BackstagePassUpdater.new(item).update
-      return
-    end
-
-    if item.name == "Conjured"
-      ConjuredUpdater.new(item).update
-      return
-    end
-
-    item_updater = get_item_updater item
-    item_updater.update
+    get_item_updater(item).update
   end
 
   def get_item_updater item
-    return DefaultUpdater.new(item)    
+    if item.name == "Sulfuras, Hand of Ragnaros"
+      return SulfurasUpdater.new(item)
+    end
+
+    if item.name == "Aged Brie"
+      return AgedBrieUpdater.new(item)
+    end
+
+    if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      return BackstagePassUpdater.new(item)
+    end
+
+    if item.name == "Conjured"
+      return ConjuredUpdater.new(item)
+    end
+
+    return DefaultUpdater.new(item)
   end
 end
 
