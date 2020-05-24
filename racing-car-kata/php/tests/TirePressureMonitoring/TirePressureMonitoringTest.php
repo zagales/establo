@@ -17,7 +17,7 @@ class TirePressureMonitoringTest extends TestCase
 
     public function testAlarmIsOnWhenOutOfThreshold(): void
     {
-        $sensor = new class() {
+        $sensor = new class () {
             public function popNextPressurePsiValue()
             {
                 return 15;
