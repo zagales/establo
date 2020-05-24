@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace RacingCar\Leaderboard;
@@ -23,7 +24,7 @@ class Race
         foreach ($drivers as $driver) {
             $name = $driver->name;
             if ($driver instanceof SelfDrivingCar) {
-                $name = "Self Driving Car - {$driver->country} ({$driver->algorithmVersion})";                
+                $name = "Self Driving Car - {$driver->country} ({$driver->algorithmVersion})";
             }
             $this->driverNames[(string)$driver] = $name;
         }

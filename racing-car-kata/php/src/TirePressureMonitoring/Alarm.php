@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace RacingCar\TirePressureMonitoring;
@@ -12,11 +13,9 @@ class Alarm
 
     public function __construct($sensor = null)
     {
-        if ($sensor == null)
-        {
+        if ($sensor == null) {
             $this->sensor = new Sensor();
-        } else 
-        {
+        } else {
             $this->sensor = $sensor;
         }
     }
@@ -24,8 +23,7 @@ class Alarm
     public function check()
     {
         $psiPressureValue = $this->sensor->popNextPressurePsiValue();
-        if ($psiPressureValue < self::LOW_PRESSURE_THRESHOLD || self::HIGH_PRESSURE_THRESHOLD < $psiPressureValue)
-        {
+        if ($psiPressureValue < self::LOW_PRESSURE_THRESHOLD || self::HIGH_PRESSURE_THRESHOLD < $psiPressureValue) {
             $this->isAlarmOn = true;
         }
     }
@@ -34,5 +32,4 @@ class Alarm
     {
         return $this->isAlarmOn;
     }
-
 }

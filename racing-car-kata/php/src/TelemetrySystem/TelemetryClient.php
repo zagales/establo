@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace RacingCar\TelemetrySystem;
@@ -18,8 +19,9 @@ class TelemetryClient
      */
     public function connect(string $telemetryServerConnectionString): void
     {
-        if (empty($telemetryServerConnectionString))
+        if (empty($telemetryServerConnectionString)) {
             throw new InvalidArgumentException();
+        }
 
         // Fake the connection with 80% changes of failure
         $success = random_int(1, 10) <= 2;
@@ -38,8 +40,9 @@ class TelemetryClient
      */
     public function send(string $message): void
     {
-        if (empty($message))
+        if (empty($message)) {
             throw new InvalidArgumentException();
+        }
 
         // The simulation of send() actually just remember
         // if the last message sent was a diagnostic
@@ -47,10 +50,11 @@ class TelemetryClient
         // This information will be used to simulate the
         // receive(). Indeed there is no real server
         // listening.
-        if ($message === self::DIAGNOSTIC_MESSAGE)
+        if ($message === self::DIAGNOSTIC_MESSAGE) {
             $this->diagnosticMessageJustSent = true;
-        else
+        } else {
             $this->diagnosticMessageJustSent = false;
+        }
     }
 
     /**
@@ -62,7 +66,7 @@ class TelemetryClient
         if ($this->diagnosticMessageJustSent) {
             # Simulate the reception of the diagnostic message
             $message =
-"LAST TX rate................ 100 MBPS\r\n
+            "LAST TX rate................ 100 MBPS\r\n
 HIGHEST TX rate............. 100 MBPS\r\n
 LAST RX rate................ 100 MBPS\r\n
 HIGHEST RX rate............. 100 MBPS\r\n

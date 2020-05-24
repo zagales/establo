@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace RacingCar\Leaderboard;
@@ -40,4 +41,3 @@ class Leaderboard
         return array_keys($points);
     }
 }
-
