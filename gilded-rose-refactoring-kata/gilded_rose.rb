@@ -10,7 +10,7 @@ class GildedRose
     end
   end
 
-  def update_item item    
+  def update_item item
     if item.name == "Sulfuras, Hand of Ragnaros"
       SulfurasUpdater.new(item).update
       return
@@ -31,7 +31,12 @@ class GildedRose
       return
     end
 
-    DefaultUpdater.new(item).update
+    item_updater = get_item_updater item
+    item_updater.update
+  end
+
+  def get_item_updater item
+    return DefaultUpdater.new(item)    
   end
 end
 
