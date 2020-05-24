@@ -11,29 +11,7 @@ class GildedRose
   end
 
   def update_item item
-    ItemUpdaterFactory.get_item_updater(item).update
-  end
-end
-
-class ItemUpdaterFactory
-  def self.get_item_updater item
-    if item.name == "Sulfuras, Hand of Ragnaros"
-      return SulfurasUpdater.new(item)
-    end
-
-    if item.name == "Aged Brie"
-      return AgedBrieUpdater.new(item)
-    end
-
-    if item.name == "Backstage passes to a TAFKAL80ETC concert"
-      return BackstagePassUpdater.new(item)
-    end
-
-    if item.name == "Conjured"
-      return ConjuredUpdater.new(item)
-    end
-
-    return DefaultUpdater.new(item)
+    ItemUpdater.create(item).update
   end
 end
 
@@ -98,6 +76,26 @@ class ItemUpdater
       decrease_quality
     end
   end  
+
+  def self.create item
+    if item.name == "Sulfuras, Hand of Ragnaros"
+      return SulfurasUpdater.new(item)
+    end
+
+    if item.name == "Aged Brie"
+      return AgedBrieUpdater.new(item)
+    end
+
+    if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      return BackstagePassUpdater.new(item)
+    end
+
+    if item.name == "Conjured"
+      return ConjuredUpdater.new(item)
+    end
+
+    return DefaultUpdater.new(item)
+  end
 end
 
 class DefaultUpdater < ItemUpdater
