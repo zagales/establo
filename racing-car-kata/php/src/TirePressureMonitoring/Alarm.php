@@ -14,7 +14,7 @@ class Alarm
 
     private $sensor;
 
-    public function __construct($sensor = null)
+    public function __construct(Sensor $sensor = null)
     {
         if ($sensor === null) {
             $this->sensor = new Sensor();
