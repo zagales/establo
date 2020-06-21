@@ -25,11 +25,15 @@ class HtmlPagesConverter
         $this->filename = $filename;
         $this->breaks = [0];
         $f = fopen($this->filename, 'r');
-        while ($line = fgets($f) !== false) {
-            $line = rtrim($line);
+        while (!feof($f)) {
+            $lineContent = fgets($f);
+            if ($lineContent === false) {
+                $lineContent = '';
+            }
+            $line = rtrim($lineContent);
+
             if (strpos($line, 'PAGE_BREAK') !== false) {
-                $pageBreakPosition = ftell($f);
-                $this->breaks[] = ftell($f);
+                $this->breaks[] = ftell($f) - strlen('PAGE_BREAK') - 1;
             }
         }
         $this->breaks[] = ftell($f);
@@ -37,21 +41,31 @@ class HtmlPagesConverter
     }
 
     /**
-     * @param int $page Page number (zero index)
+     * @param int $page Page number
      * @return string HTML page with the given number
      */
     public function getHtmlPage(int $page): string
     {
-        $pageStart = $this->breaks[$page];
-        $pageEnd = $this->breaks[$page + 1];
+        $index = $page - 1;
+
+        if (!isset($this->breaks[$index])) {
+            throw new \Exception(sprintf('Page %d not found', $page), 404);
+        }
+
+        $pageStart = $this->breaks[$index];
+        $pageEnd = $this->breaks[$index + 1];
         $html = '';
         $f = fopen($this->filename, 'r');
         fseek($f, $pageStart);
         while (ftell($f) !== $pageEnd) {
-            $line = rtrim(fgets($f));
-            if (strpos($line, 'PAGE_BREAK') !== false) {
-                continue;
+            $line = fgets($f);
+
+            if ($line === false) {
+                $line = '';
             }
+
+            $line = rtrim($line);
+
             $html .= htmlspecialchars($line, ENT_QUOTES | ENT_HTML5);
             $html .= '<br />';
         }

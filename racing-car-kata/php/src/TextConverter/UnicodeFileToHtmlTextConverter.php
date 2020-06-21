@@ -18,12 +18,11 @@ class UnicodeFileToHtmlTextConverter
         $f = fopen($this->fullFileNameWithPath, 'r');
         $html = '';
         if ($f) {
-            while (!feof($f)){
+            while (!feof($f)) {
                 $lineContent = fgets($f);
-                if($lineContent === false){
+                if ($lineContent === false) {
                     $lineContent = '';
                 }
-
                 $line = rtrim($lineContent);
                 $html .= htmlspecialchars($line, ENT_QUOTES | ENT_HTML5);
                 $html .= '<br />';
