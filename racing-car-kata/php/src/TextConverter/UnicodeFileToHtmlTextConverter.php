@@ -17,10 +17,16 @@ class UnicodeFileToHtmlTextConverter
     {
         $f = fopen($this->fullFileNameWithPath, 'r');
         $html = '';
-        while ($line = fgets($f) !== false) {
-            $line = rtrim($line);
-            $html .= htmlspecialchars($line, ENT_QUOTES | ENT_HTML5);
-            $html .= '<br />';
+        if ($f) {
+            while (!feof($f)){
+                $lineContent = fgets($f);
+                if($lineContent === false){
+                    $lineContent = '';
+                }
+                $line = rtrim($lineContent);
+                $html .= htmlspecialchars($line, ENT_QUOTES | ENT_HTML5);
+                $html .= '<br />';
+            }
         }
         fclose($f);
         return $html;

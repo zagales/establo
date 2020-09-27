@@ -12,6 +12,14 @@ class UnicodeFileToHtmlTextConverterTest extends TestCase
     public function testFoo(): void
     {
         $converter = new UnicodeFileToHtmlTextConverter('foo');
-        $this->assertSame('fixme', $converter->getFileName());
+        $this->assertSame('foo', $converter->getFileName());
+    }
+
+    public function testBreakLinesAddedToSourceFile(): void
+    {
+        $converter = new UnicodeFileToHtmlTextConverter(__DIR__ . '/files/unicodeFile.txt');
+        $htmlResult = $converter->convertToHtml();
+        $breakLines = preg_match_all('/<br \/>/', $htmlResult);
+        $this->assertEquals(2, $breakLines);
     }
 }
