@@ -20,24 +20,10 @@ class HtmlPagesConverter
      * HtmlPages constructor.
      * Reads the file and note the positions of the page breaks so we can access them quickly
      */
-    public function __construct(string $filename)
+    public function __construct(string $filename, PageBreakFileParser $pageBreakFileParser)
     {
+        $this->breaks = $pageBreakFileParser->getPageBreaks();
         $this->filename = $filename;
-        $this->breaks = [0];
-        $f = fopen($this->filename, 'r');
-        while (!feof($f)) {
-            $lineContent = fgets($f);
-            if ($lineContent === false) {
-                $lineContent = '';
-            }
-            $line = rtrim($lineContent);
-
-            if (strpos($line, 'PAGE_BREAK') !== false) {
-                $this->breaks[] = ftell($f) - strlen('PAGE_BREAK') - 1;
-            }
-        }
-        $this->breaks[] = ftell($f);
-        fclose($f);
     }
 
     /**
