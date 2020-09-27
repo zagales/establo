@@ -23,7 +23,6 @@ class UnicodeFileToHtmlTextConverter
                 if($lineContent === false){
                     $lineContent = '';
                 }
-
                 $line = rtrim($lineContent);
                 $html .= htmlspecialchars($line, ENT_QUOTES | ENT_HTML5);
                 $html .= '<br />';
